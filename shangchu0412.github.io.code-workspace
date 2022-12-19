@@ -2,12 +2,9 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../web01"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "web01"
+		"liveServer.settings.multiRootWorkspaceName": "shangchu0412.github.io"
 	}
 }
