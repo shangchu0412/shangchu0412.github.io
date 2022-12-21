@@ -41,18 +41,10 @@
   <main class="container">
     <h1 class="text-center mt-3">表單</h1>
 
-    <form action="https://script.google.com/macros/s/AKfycbwtDqZiw3RSzAksn5TaFedWu_V0GGa51UrDXk9UVswEBCg_9bF18Hc9M0uuNxsxNpZg/exec" method="post">
-      <div class="row">
-
-    </form>
-
-    <form action="" class="border border-primary">
+    <form action="https://script.google.com/macros/s/AKfycbyiRhP6S8m9RKNsbIv9ZNPdrpZiXmzaS7uMVysqcH5RljZCzWYCwpKAXIKSkX4TVEmzIA/exec" class="border border-primary"  method="post">
       <div class="row" id="form_item">
 
       </div>
-
-      <!-- 隱藏-->
-      <input type="hidden" name='op' value='set_sheet' class="form-control" id="op">
       <button type="submit" class="btn btn-primary w-100" id="submit">送出</button>
     </form>
   </main>
@@ -61,9 +53,7 @@
     window.onload = function() {
       let submitBtn = document.getElementById('submit');
       submitBtn.onclick = function() {
-
       }
-
       let box = document.querySelector('.container');
       box.insertAdjacentHTML("afterend", "<div class='text-center mt-3'>container寬度：" + box.clientWidth + "px</div>" + "<div class='text-center mt-3'>網頁可見區域寬：" + document.body.clientWidth + "px</div>");
 
@@ -74,7 +64,7 @@
           type: 'text',
           name: 'name',
           value: '',
-          valid: '', //required
+          valid: 'required', //required
           option: '',
           width: '3'
         },
@@ -92,7 +82,7 @@
           type: 'email',
           name: 'email',
           value: '',
-          valid: 'required', //required
+          valid: '', //required
           option: '',
           width: '3'
         },
@@ -164,7 +154,7 @@
           type: 'radio',
           name: 'radio',
           value: '',
-          valid: 'required', //required
+          valid: '', //required
           option: '單選1|單選2|單選3',
           width: '12'
         },
@@ -182,7 +172,7 @@
           type: 'select_m',
           name: 'area',
           value: '',
-          valid: 'required', //required
+          valid: '', //required
           option: '台北|台中|台南|高雄',
           width: '6'
         },
@@ -191,19 +181,37 @@
           type: 'textarea',
           name: 'textarea',
           value: '',
-          valid: 'required', //required
+          valid: '', //required
           option: '',
           width: '12'
         },
         {
-          label: '總類',
+          label: '種類',
           type: 'checkbox',
           name: 'checkbox',
           value: '',
-          valid: 'required', //required
+          valid: '', //required
           option: '學科|術科',
           width: '12'
         },
+        {
+          label: 'op',
+          type: 'hidden',
+          name: 'op',
+          value: 'set_sheet',
+          valid: '', //required
+          option: '',
+          width: '3'
+        },
+        {
+          label: 'callback_url',
+          type: 'hidden',
+          name: 'callback_url',
+          value: 'set_sheet',
+          valid: '', //required
+          option: '',
+          width: '3'
+        }
       ];
       let form_item = document.getElementById('form_item');
       let form_item_html = options_html = '';
@@ -299,14 +307,19 @@
               <label class="form-label w-100">${stru[i]['label']}</label>
               ${options_html}
             </div>`;
+        }else if (stru[i]['type'] === 'hidden') {
+          form_item_html += `
+            <input type="hidden" name="${stru[i]['name']}" value="${stru[i]['value']}" class="form-control" id="${stru[i]['name']}">`;
         }
 
       }
       form_item.innerHTML = form_item_html;
+      let callback_url = document.getElementById('callback_url')
+      callback_url.value = window.location.href;
     }
-    /*
+    /*=========================================
     渲染畫面
-    */
+    =========================================*/
     function renderCheckbox(name) {
       if(isAtLeastOneChecked(name)){
         removeRequired(name);
