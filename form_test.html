@@ -65,23 +65,6 @@
           </div>
         </div>
 
-        <!-- 下拉選單(多選) -->
-        <div class="col-sm-6 mb-3">
-          <label class="form-label">下拉選單(多選)</label>
-          <select name="select_m" class="form-select" id="select_m" multiple>
-            <option value="下拉選單(多選)1">下拉選單(多選)1</option>
-            <option value="下拉選單(多選)2" selected>下拉選單(多選)2</option>
-            <option value="下拉選單(多選)3">下拉選單(多選)3</option>
-          </select>
-        </div>
-
-        <!-- 文字區域(多行) -->
-        <div class="col-sm-12 mb-3">
-          <label class="form-label">文字區域</label>
-          <textarea name="textarea" class="form-control" id="textarea" rows="5" required>文字區域123</textarea>
-        </div>
-      </div>
-
 
     </form>
 
@@ -216,6 +199,24 @@
           option: '下拉選單1|下拉選單2|下拉選單3',
           width: '6'
         },
+        {
+          label: '地區',
+          type: 'select_m',
+          name: 'area',
+          value: '',
+          valid: 'required', //required
+          option: '台北|台中|台南|高雄',
+          width: '6'
+        },
+        {
+          label: '文字區域',
+          type: 'textarea',
+          name: 'textarea',
+          value: '',
+          valid: 'required', //required
+          option: '',
+          width: '12'
+        },
       ];
       let form_item = document.getElementById('form_item');
       let form_item_html = options_html = '';
@@ -266,13 +267,34 @@
             <option value="${options[j]}">${options[j]}</option>`;
           }
             form_item_html += `
-            <div class="col-sm-6 mb-3">
+            <div class="col-sm-${stru[i]['width']} mb-3">
               <label class="form-label">${stru[i]['label']}</label>
               <select name="${stru[i]['name']}" class="form-select" id="${stru[i]['name']}" ${stru[i]['valid']}>
               ${options_html}
               </select>
             </div>`;
+        }else if (stru[i]['type'] === 'select_m') {
+          options = stru[i]['option'].split('|');
+          options_html = '';
+          for (let j in options) {
+            options_html += `
+            <option value="${options[j]}">${options[j]}</option>`;
+          }
+            form_item_html += `
+            <div class="col-sm-${stru[i]['width']} mb-3">
+              <label class="form-label">${stru[i]['label']}</label>
+              <select name="${stru[i]['name']}" class="form-select" id="${stru[i]['name']}" ${stru[i]['valid']} multiple size=2>
+              ${options_html}
+              </select>
+            </div>`;
+        }else if (stru[i]['type'] === 'textarea') {
+          form_item_html += `
+          <div class="col-sm-${stru[i]['width']} mb-3">
+          <label class="form-label">${stru[i]['label']}</label>
+          <textarea name="${stru[i]['name']}" class="form-control" id="${stru[i]['name']}" rows="5" ${stru[i]['valid']}>${stru[i]['value']}</textarea>
+        </div>`;
         }
+
       }
       form_item.innerHTML = form_item_html;
     }
