@@ -48,7 +48,7 @@
   <main class="container">
     <h1 class="text-center mt-3">繳費通知單</h1>
 
-    <form action="https://script.google.com/macros/s/AKfycbyiRhP6S8m9RKNsbIv9ZNPdrpZiXmzaS7uMVysqcH5RljZCzWYCwpKAXIKSkX4TVEmzIA/exec" method="post">
+    <form action="" method="post" id="myForm">
       <div class="row" id="form_item">
 
       </div>
@@ -60,6 +60,7 @@
 
   <script>
     window.onload = function() {
+
       let submitBtn = document.getElementById('submit');
       submitBtn.onclick = function() {
       }
@@ -69,6 +70,8 @@
       // 整理出來的結構資料
       // 取得結構
       let url = 'https://script.google.com/macros/s/AKfycbyiRhP6S8m9RKNsbIv9ZNPdrpZiXmzaS7uMVysqcH5RljZCzWYCwpKAXIKSkX4TVEmzIA/exec';
+
+      $('#myForm').prop('action', url);
 
       let data = {
         op: 'api_stru_payment'
