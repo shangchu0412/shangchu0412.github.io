@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  table {
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+  }
+
+  table th,
+  td {
+    border: 1px solid #000000;
+    padding: 15px;
+  }
+  table caption {
+    margin: 15px 0;
+  }
+</style>
+
+<body>
+
+  <script>
+    let price = prompt('請輸入商品價格:')
+    let num = prompt('請輸入購買數量:')
+    let address = prompt('請輸入收獲地址:')
+    document.write(`
+    <table>
+    <caption>
+      <h2>訂單確認</h2>
+    </caption>
+    <tr>
+      <th>商品名稱</th>
+      <th>商品價格</th>
+      <th>商品數量</th>
+      <th>總價</th>
+      <th>收貨地址</th>
+    </tr>
+    <tr>
+      <td>小米手機青春PLUS</td>
+      <td>${price}元</td>
+      <td>${num}</td>
+      <td>${price * num}元</td>
+      <td>${address}</td>
+    </tr>
+  </table>
+    `)
+  </script>
+</body>
+
+</html>
